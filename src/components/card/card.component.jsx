@@ -5,12 +5,10 @@ import './card.styles.css';
 export const Card = props => (
   <div className='card-container'>
     <img
-      alt='user'
-      src={`https://robohash.org/${props.user.id}?set=set5&size=120x120`}
+      alt='Photo'
+      src={`https://live.staticflickr.com/${props.photo.server}/${props.photo.id}_${props.photo.secret}_w.jpg`}
+      className="thumbnail-photo"
     />
-    <h2> NAME: {props.user.name} </h2>
-    <p> Email: {props.user.email} </p>
-    <p> Website: {props.user.website}</p>
-    <p>Company: {props.user.company.name}</p>
+    <div> TITLE: {props.photo.title} </div>
   </div>
 );

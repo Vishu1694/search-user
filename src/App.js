@@ -10,15 +10,15 @@ class App extends Component {
     super();
 
     this.state = {
-      users: [],
+      photos: [],
       searchField: ''
     };
   }
 
   componentDidMount() {
-    fetch('https://jsonplaceholder.typicode.com/users')
+    fetch('https://www.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=7fafbe43ad20e974cfe756a3316f4fe5&format=json&nojsoncallback=1&per_page=10')
       .then(response => response.json())
-      .then(users => this.setState({ users: users }));
+      .then(photos => this.setState({ photos: photos.photos.photo }));
   }
 
   onSearchChange = event => {
@@ -26,16 +26,16 @@ class App extends Component {
   };
 
   render() {
-    const { users, searchField } = this.state;
-    const filteredusers = users.filter(user =>
-      user.email.toLowerCase().includes(searchField.toLowerCase())
+    const { photos, searchField } = this.state;
+    const filteredPhotos = photos.filter(photo =>
+      photo.title.toLowerCase().includes(searchField.toLowerCase())
     );
 
     return (
       <div className='App'>
         <h1>Find Users</h1>
         <SearchBox onSearchChange={this.onSearchChange} />
-        <CardList users={filteredusers} />
+        <CardList photos={filteredPhotos} />
       </div>
     );
   }
